@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web bls2brs</title>
+  <title>Brickadia BLS2BRS</title>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-  <div id="app">
-    <form id="blsForm">
-      <input name="file" type="file" multiple>
-      <input type="submit">
-    </form>
+  <div class="convert-form">
+    <div class="ui icon attached message">
+      <i class="icon sync"></i>
+      <div class="content">
+        <div class="header">
+          BLS2BRS
+        </div>
+        <p>
+          Brickadia Save Conversion Tool
+        </p>
+      </div>
+    </div>
+    <div class="ui attached segment">
+      <p>
+        This is a tool for converting Blockland save files (.bls) to Brickadia save files (.brs)
+      </p>
+      <div class="file-container">
+        <div class="upload-text">
+          Click or Drag .BLS Files to Convert
+        </div>
+        <input id="file" type="file" multiple>
+      </div>
+    </div>
+    <div class="ui info bottom attached message">
+      <i class="icon github"></i>
+      Check out the code on <a href="https://github.com/brickadia/bls2brs">Github</a>!
+    </div>
+  </div>
+  <div id="converted" class="converted-saves">
   </div>
   <script src="public/bundle.js"></script>
 </body>

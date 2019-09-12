@@ -1,0 +1,58 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #eef;
+
+}
+
+.convert-form,
+.converted-saves {
+  max-width: 400px;
+}
+
+.convert-form {
+  margin: 80px auto 20px auto;
+}
+
+.converted-saves {
+  margin: 0 auto;
+  margin-bottom: 80px;
+}
+
+.converted-saves .button {
+  position: absolute;
+  right: 21px;
+  bottom: 14px;
+}
+
+a.button:hover {
+  text-decoration: none;
+}
+
+.file-container {
+  align-items: center;
+  border-radius: 14px;
+  border: 2px dashed #aaa;
+  color: #666;
+  display: flex;
+  font-size: 20px;
+  height: 70px;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+i.close {
+  right: 5px !important;
+  top: 5px !important;
+}
+
+.file-container input {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

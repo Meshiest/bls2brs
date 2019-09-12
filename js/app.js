@@ -32,44 +32,118 @@ document.addEventListener('DOMContentLoaded', async () => {
     })
   }
 
-
-  // Click on a magical link to download a file
-  function downloadFile(blob, filename) {
-    const elem = document.createElement('a');
-    document.body.appendChild(elem);
-    elem.style.display = 'none';
-
-    const objUrl = elem.href = window.URL.createObjectURL(blob);
-    elem.download = filename;
-    elem.click();
-
-    window.URL.revokeObjectURL(objUrl);
-    document.body.removeChild(elem);
-  }
-
-  $('#blsForm').addEventListener('submit', event => {
+  $('#file').addEventListener('change', event => {
     event.preventDefault();
 
-    const fileInput = event.target.file;
+    const fileInput = event.target;
 
-    const promises = Array.from(fileInput.files)
-      .map(f => {
-        console.log('Converting', f.name);
+    Array.from(fileInput.files)
+      .forEach(f => {
         const newName = f.name.replace(/(.bls|)$/, '.brs');
-        convertFile(f)
-          .then(blob =>
-            downloadFile(blob, newName)
-          )
-          .catch(e => {
-            console.error('oops', e);
-            return Promise.resolve();
-          });
-      });
+        const isBls = f.name.match(/\.bls$/);
 
-    Promise.all(promises)
-      .then(() => {
-        console.log('done!');
-      })
+        /*
+          I'm too lazy to setup the boilerplate for
+          React or Vue but not lazy enough to not
+          make all the elements by hand :|
+         */
+        
+
+        // Element creation helper function
+        const makeElem = (tag='div', className='', ...children) => {
+          const el = document.createElement(tag);
+          el.className = className;
+
+          // Append all the child nodes
+          children.forEach(c => {
+            const child = typeof c === 'string'
+              ? document.createTextNode(c) 
+              : c;
+            el.appendChild(child);
+          });
+
+          return el;
+        }
+
+        // Icon helper function
+        const icon = name => makeElem('i', 'icon ' + name);
+
+        // Close warning icon
+        const closeIcon = icon('close');
+        
+        // Create file message
+        const elem = makeElem('div', 'ui message', closeIcon);
+
+        closeIcon.addEventListener('click', () => {
+          $('#converted').removeChild(elem);
+        });
+
+        if(isBls) {
+          elem.className += ' icon';
+          const loadingIcon = icon('notched circle loading');
+          const loadingMsg = makeElem('div', 'content',
+            makeElem('div', 'header', 'Converting File...'),
+            makeElem('p', '',
+              makeElem('code', '', f.name),
+              ' is being converted'
+            )
+          );
+
+          elem.appendChild(loadingIcon);
+          elem.appendChild(loadingMsg);
+
+          convertFile(f)
+            .then(blob => {
+              elem.removeChild(loadingMsg);
+              elem.removeChild(loadingIcon);
+
+              const successIcon = icon('check');
+              const downloadButton = makeElem('a', 'ui icon button primary', icon('download'));
+
+              downloadButton.href = window.URL.createObjectURL(blob);
+              downloadButton.download = newName;
+
+              const successMsg = makeElem('div', 'content',
+                makeElem('div', 'header', newName),
+                makeElem('p', '',
+                  'Conversion Succeeded!',
+                  downloadButton,
+                )
+              );
+              elem.className += ' info';
+              elem.appendChild(successIcon);
+              elem.appendChild(successMsg);
+              // Success!
+              // downloadFile(blob, newName)
+            })
+            .catch(e => {
+              console.error('Conversion Error', f.name, e);
+
+              // Remove old text
+              elem.removeChild(loadingMsg);
+              elem.removeChild(loadingIcon);
+
+              // Populate with very vague error message
+              elem.className = 'ui message error';
+              elem.appendChild(makeElem('div', 'header', 'Error Converting File'));
+              elem.appendChild(makeElem('p', '',
+                makeElem('u', '', f.name),
+                ' could not be converted'
+              ));
+            });
+        } else {
+          // Provide invalid format warning message
+          elem.className += ' warning';
+          elem.appendChild(makeElem('div', 'header', 'Invalid File Format'));
+          elem.appendChild(makeElem('p', '',
+            makeElem('u', '', f.name),
+            ' is not the correct format (.bls)'
+          ));
+        }
+
+        $('#converted').appendChild(elem);
+      });
+    fileInput.value = '';
   });
 });
 
