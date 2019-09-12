@@ -60,6 +60,18 @@
 /******/ 					},
 /******/ 					"__wbg_log_4b82d6e3b3736519": function(p0i32,p1i32) {
 /******/ 						return installedModules["./pkg/bls2brs.js"].exports["__wbg_log_4b82d6e3b3736519"](p0i32,p1i32);
+/******/ 					},
+/******/ 					"__wbindgen_object_drop_ref": function(p0i32) {
+/******/ 						return installedModules["./pkg/bls2brs.js"].exports["__wbindgen_object_drop_ref"](p0i32);
+/******/ 					},
+/******/ 					"__wbg_getTime_48254521f4a36c7e": function(p0i32) {
+/******/ 						return installedModules["./pkg/bls2brs.js"].exports["__wbg_getTime_48254521f4a36c7e"](p0i32);
+/******/ 					},
+/******/ 					"__wbg_new0_d4cd03346884f97f": function() {
+/******/ 						return installedModules["./pkg/bls2brs.js"].exports["__wbg_new0_d4cd03346884f97f"]();
+/******/ 					},
+/******/ 					"__wbindgen_throw": function(p0i32,p1i32) {
+/******/ 						return installedModules["./pkg/bls2brs.js"].exports["__wbindgen_throw"](p0i32,p1i32);
 /******/ 					}
 /******/ 				}
 /******/ 			};
@@ -162,7 +174,7 @@
 /******/ 				promises.push(installedWasmModuleData);
 /******/ 			else {
 /******/ 				var importObject = wasmImportObjects[wasmModuleId]();
-/******/ 				var req = fetch(__webpack_require__.p + "" + {"./pkg/bls2brs_bg.wasm":"58f33db8eefcb89493f0"}[wasmModuleId] + ".module.wasm");
+/******/ 				var req = fetch(__webpack_require__.p + "" + {"./pkg/bls2brs_bg.wasm":"5a501c10a1d07f322fa3"}[wasmModuleId] + ".module.wasm");
 /******/ 				var promise;
 /******/ 				if(importObject instanceof Promise && typeof WebAssembly.compileStreaming === 'function') {
 /******/ 					promise = Promise.all([WebAssembly.compileStreaming(req), importObject]).then(function(items) {
