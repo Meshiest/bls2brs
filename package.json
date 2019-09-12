@@ -1,0 +1,24 @@
+{
+  "name": "bls2brs",
+  "version": "0.1.0",
+  "description": "Website to convert bls to brs",
+  "main": "index.html",
+  "scripts": {
+    "build": "wasm-pack build && webpack",
+    "watch": "webpack -w",
+    "start": "node js/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/meshiest/bls2brs"
+  },
+  "author": "Meshiest <meek.mesh@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@wasm-tool/wasm-pack-plugin": "^1.0.1",
+    "express": "^4.17.1",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
+  },
+  "dependencies": {}
+}
