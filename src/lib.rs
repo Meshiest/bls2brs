@@ -12,8 +12,8 @@ extern "C" {
 }
 
 #[wasm_bindgen]
-pub fn load_file(body: &str) -> std::vec::Vec<u8> {
-    let reader = bl_save::Reader::new(body.as_bytes()).unwrap();
+pub fn load_file(body: Vec<u8>) -> std::vec::Vec<u8> {
+    let reader = bl_save::Reader::new(body.as_slice()).unwrap();
     if let Ok(bls) = convert(reader) {
         let mut writer = vec![];
         brs::write_save(&mut writer, &bls.write_data).unwrap();

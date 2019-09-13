@@ -1,6 +1,6 @@
 [package]
 name = "bls2brs"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Meshiest <meek.mesh@gmail.com>"]
 description = "Website/WASM to convert bls2brs"
 repository = "https://github.com/meshiest/bls2brs"
