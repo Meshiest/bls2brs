@@ -9,31 +9,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Given a File object, read it, pass it into wasm to be converted, resolve a blob 
   function convertFile(file) {
-    // return new Promise((resolve, reject) => {
-      /*const reader = new FileReader();
-      reader.onloadend = e => {
-        try {
-
-          const brs = load_file(reader.result);
-          if(!brs.length) {
-            console.error('Error converting bls');
-            reject(new Error('No Bricks'));
-            return;
-          }
-
-          resolve(new Blob([brs], { type: 'octet/stream' }));
-        } catch (e) {
-          console.error('Error converting bls', e)
-          reject(e);
-        }
-      };
-
-      reader.readAsBinaryString(file);*/
-      return file
-        .arrayBuffer()
-        .then(load_file)
-        .then(brs => new Blob([brs], { type: 'octet/stream' }))
-    // })
+    return file
+      .arrayBuffer()
+      .then(load_file)
+      .then(brs => new Blob([brs], { type: 'octet/stream' }))
   }
 
   $('#file').addEventListener('change', event => {
