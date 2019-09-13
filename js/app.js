@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Given a File object, read it, pass it into wasm to be converted, resolve a blob 
   function convertFile(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
+    // return new Promise((resolve, reject) => {
+      /*const reader = new FileReader();
       reader.onloadend = e => {
         try {
 
@@ -28,8 +28,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       };
 
-      reader.readAsBinaryString(file);
-    })
+      reader.readAsBinaryString(file);*/
+      return file
+        .arrayBuffer()
+        .then(load_file)
+        .then(brs => new Blob([brs], { type: 'octet/stream' }))
+    // })
   }
 
   $('#file').addEventListener('change', event => {
